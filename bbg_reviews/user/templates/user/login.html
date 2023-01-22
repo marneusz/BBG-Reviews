@@ -1,0 +1,20 @@
+{% extends "user/index.html" %}
+{% load crispy_forms_tags %}
+{% block start %}
+
+ <div class="content-section col-md-8 col-md-offset-2">
+  <center>
+  <form method="POST" class="form-style">
+    {% csrf_token %}
+    <fieldset class="form-group">
+      {{ form|crispy}}
+    </fieldset>
+   <center>
+    <button class="btn btn-outline-info" type="submit"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Login</button>
+  </center>
+  <br/>
+  <sub class="link-style"><a href="{% url 'register' %}">The account does not exist. Please, sign up to continue.</a></sub>
+  </form>
+</center>
+ </div>
+{% endblock start %}

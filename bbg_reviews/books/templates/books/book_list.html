@@ -1,0 +1,47 @@
+{% extends 'user/index.html' %}
+{% load bootstrap3 %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'books/book_list.css' %}">
+{% endblock %}
+
+
+{% block title %}
+    <h2>Book list</h2>
+{% endblock %}
+
+{% block content %}
+    {% if book_list %}
+    <div class="for_table">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Genre</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in book_list %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'book_detail' book.id %}">{{ book.title }}</a>
+                        </td>
+                        <td>{{ book.author }}</td>
+                        <td>{{ book.genre }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div>
+            <a href="{% url 'add_author' %}" class="btn btn-primary">Add Author</a>
+            <a href="{% url 'add_book' %}" class="btn btn-primary">Add Book</a>
+        </div>
+        
+    </div>
+    
+    {% else %}
+        <p>No books are available.</p>
+    {% endif %}
+{% endblock %}

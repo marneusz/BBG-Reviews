@@ -1,0 +1,94 @@
+.book-detail {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.book-info {
+    flex: 1;
+    padding: 1rem;
+}
+
+.book-title {
+    margin-top: 0;
+}
+
+.book-author {
+    color: gray;
+}
+
+.review-stats {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: gray;
+}
+
+.review-section {
+    flex: 2;
+    padding: 1rem;
+    border-left: 1px solid lightgray;
+}
+
+.review-list {
+    list-style: none;
+    padding: 0;
+}
+
+.review-item {
+    margin-bottom: 1rem;
+}
+
+.review-text {
+    margin-bottom: 0.5rem;
+}
+
+.review-meta {
+    font-size: 0.8rem;
+    color: gray;
+}
+
+.review-detail-link {
+    margin-left: 0.5rem;
+    text-decoration: underline;
+}
+
+.add-review-section {
+    margin-top: 2rem;
+}
+
+.form-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.form-check {
+    margin-right: 1rem;
+}
+
+.form-group label {
+    margin-right: 1rem;
+}
+
+.form-group .form-control {
+    width: 100%;
+}
+
+.form-group button {
+    margin-top: 1rem;
+    align-self: flex-start;
+}
+
+.form-group .rating {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.form-group .rating .form-check {
+    margin-right: 0.5rem;
+}
+
+.form-group .rating label {
+    margin-right: 0.5rem;
+}

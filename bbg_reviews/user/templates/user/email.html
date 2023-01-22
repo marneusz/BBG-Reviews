@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="{% static 'user/email.css' %}">
+    </head>
+    <body class="body-background">
+        <div class="container">
+            <section class="section-style">
+                <h2 class="center-text">Thank you for the registration!</h2>
+                <hr class="hr-style">
+                <p class="bold-text">Hi, {{username}}! We have received your details and will process them soon.</p>
+            </section>
+        </div>
+    </body>
+</html>

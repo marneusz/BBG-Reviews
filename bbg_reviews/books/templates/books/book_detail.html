@@ -1,0 +1,76 @@
+{% extends 'user/index.html' %}
+{% load static %}
+
+{% block title %} {{ book.title }} - Details {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'books/book_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="book-detail">
+  <div class="book-info">
+    <h1 class="book-title">{{ book.title }}</h1>
+    <h2 class="book-author">by {{ book.author }}</h2>
+    <div class="review-stats">
+        <span class="review-count">{{ book.review_set.count }} reviews</span>
+        <span class="average-rating">({{ book.average_rating | floatformat }} average rating)</span>
+    </div>
+  </div>
+  <div class="review-section">
+    <h3>Recent reviews</h3>
+    {% if book.review_set.all %}
+    <div class="review-list">
+        {% for review in book.review_set.all %}
+        <div class="review-item">
+            <div class="review-text">{{ review.comment }}</div>
+            <div class="review-meta">
+                Rated {{ review.rating }} of 10 by {{ review.user_name }}
+                <a href="{% url 'review_detail' review.id %}" class="review-detail-link">Read more</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No reviews for this book yet</p>
+    {% endif %}
+  </div>
+  {% block add_review_form %}
+    <div class="add-review-section">
+        <h3>Add your review</h3>
+        <form method="post" action="{% url 'add_review' %}">
+        {% csrf_token %}
+        <input type="hidden" name="book_id" value="{{ book.id }}">
+        <div class="form-group">
+            <label for="rating">Rating:</label>
+            {% for choice in form.rating.field.choices %}
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="{{ form.rating.name }}" id="rating{{ forloop.counter }}" value="{{ choice.0 }}" {% if form.rating.value == choice.0 %}checked{% endif %}>
+                    <label class="form-check-label" for="rating{{ forloop.counter }}">{{ choice.1 }}</label>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            <label for="comment">Comment:</label>
+            {{ form.comment }}
+        </div>
+        <button type="submit" class="btn btn-primary">Add Review</button>
+        </form>
+    </div>
+    {% endblock %}
+
+    {% if form.errors %}
+        <div class="alert alert-danger">
+            <strong>There were errors with your submission:</strong>
+            <ul>
+            {% for field in form %}
+                {% for error in field.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
