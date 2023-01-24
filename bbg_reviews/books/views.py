@@ -32,7 +32,7 @@ def review_detail(request, review_id):
     return render(request, "books/review_detail.html", {"review": review})
 
 
-@login_required
+@login_required(login_url="login")
 def add_review(request):
     form = ReviewForm(request.POST)
     if form.is_valid():
@@ -45,7 +45,7 @@ def add_review(request):
     return render(request, "books/book_detail.html", {"form": form})
 
 
-@login_required
+@login_required(login_url="login")
 def add_book(request):
     if request.method == "POST":
         # handle form submission
@@ -59,7 +59,7 @@ def add_book(request):
     return render(request, "books/add_book.html", {"form": form})
 
 
-@login_required
+@login_required(login_url="login")
 def add_author(request):
     if request.method == "POST":
         form = AuthorForm(request.POST)

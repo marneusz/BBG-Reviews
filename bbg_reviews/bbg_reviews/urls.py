@@ -18,6 +18,8 @@ from django.contrib.auth import views as auth
 from django.urls import path, include
 from user import views as user_view
 
+from user.views import PasswordResetView
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     # user-related urls
@@ -29,6 +31,28 @@ urlpatterns = [
         name="logout",
     ),
     path("register/", user_view.register, name="register"),
+    path("password_reset", PasswordResetView.as_view(), name="password_reset",),
+    path(
+        "password_reset/done",
+        auth.PasswordResetDoneView.as_view(
+            template_name="user/password_reset_done.html"
+        ),
+        name="password_reset_done",
+    ),
+    path(
+        "reset/<uidb64>/<token>",
+        auth.PasswordResetConfirmView.as_view(
+            template_name="user/password_reset_confirm.html"
+        ),
+        name="password_reset_confirm",
+    ),
+    path(
+        "reset/done",
+        auth.PasswordResetCompleteView.as_view(
+            template_name="user/password_reset_complete.html"
+        ),
+        name="password_reset_complete",
+    ),
     # app-related urls
     path("books/", include("books.urls"), name="books"),
 ]

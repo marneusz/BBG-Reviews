@@ -75,6 +75,8 @@
             {% else %}
             <li><a href="{% url "register" %}"><span class="glyphicon glyphicon-user"></span> &nbsp; Sign up</a></li>
             <li><a href="{% url "login" %}"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Log in</a></li>
+            <li><a href="{% url 'password_reset' %}"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Forgot your password?</a></li>
+
             {% endif %}
 
           </ul>
@@ -87,14 +89,19 @@
   <br>
   <div class="row">
     {% block start %}
-    {% if user.is_authenticated %}
-    <div id="content">
-      <center><h1> {% block title %} Welcome back, {{user.username}}! {% endblock %} </h1></center>
+    <center>
+      {% block title %}
+          {% if user.is_authenticated %}
+          <div id="content">
+            <h1>Welcome back, {{user.username}}! </h1>
+          </div>
+          {% else %}
+          <center><h1>  Please, log in to have access to all functionalities! </h1></center>
+          {% endif %}
+      {% endblock %}
+    </center>
+
       {% block content %}  {% endblock %}
-    </div>
-    {% else %}
-    <center><h1>Log in to see the content of this page!</h1></center>
-    {% endif %}
     {% endblock %}
   </div>
 </body>

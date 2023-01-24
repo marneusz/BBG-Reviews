@@ -1,10 +1,5 @@
 {% extends 'user/index.html' %}
 {% load bootstrap3 %}
-{% load static %}
-
-{% block extra_css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'books/add_book.css' %}">
-{% endblock %}
 
 {% block title %}
 <h2 class="text-center mb-5">Add a New Author</h2>
@@ -12,12 +7,12 @@
 
 {% block content %}
     <div class="container">
-        <form method="post" class="form-group">
+        <form method="post">
             {% csrf_token %}
             <div class="row">
                 <div class="col-md-6 offset-md-3">
-                    {{ form }}
-                    <input class="btn btn-success btn-block mt-4" type="submit" value="Save">
+                    {% bootstrap_form form %} <br/>
+                    <input class="btn btn-primary" type="submit" value="Save">
                 </div>
             </div>
         </form>

@@ -53,42 +53,22 @@
 }
 
 .add-review-section {
-    margin-top: 2rem;
-}
-
-.form-group {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+    text-align: center;
+    flex: 2;
+    padding: 1rem;
+    border-left: 1px solid lightgray;
 }
 
 .form-check {
     margin-right: 1rem;
 }
 
-.form-group label {
-    margin-right: 1rem;
+
+.form-check-label+.form-check-input {
+    margin-left: 1rem;
 }
 
-.form-group .form-control {
-    width: 100%;
-}
-
-.form-group button {
-    margin-top: 1rem;
-    align-self: flex-start;
-}
-
-.form-group .rating {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.form-group .rating .form-check {
-    margin-right: 0.5rem;
-}
-
-.form-group .rating label {
-    margin-right: 0.5rem;
+.form-control {
+    width: 50%;
+    align-content: center;
 }

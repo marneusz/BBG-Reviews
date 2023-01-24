@@ -1,7 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.views import PasswordResetView
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
 from django.core.mail import EmailMultiAlternatives, send_mail
 from django.shortcuts import redirect, render
 from django.template import Context
@@ -47,9 +48,7 @@ def register(request):
         form = UserRegisterForm()
 
     return render(
-        request,
-        "user/register.html",
-        context={"form": form, "title": "Register here"},
+        request, "user/register.html", context={"form": form, "title": "Register here"},
     )
 
 
@@ -68,3 +67,14 @@ def login_(request):
     else:
         form = AuthenticationForm()
     return render(request, "user/login.html", context={"form": form, "title": "Log in"})
+
+
+class PasswordResetView(PasswordResetView):
+    template_name = "user/password_reset.html"
+    form_class = PasswordResetForm
+
+    def form_valid(self, form):
+        email = form.cleaned_data["email"]
+        print("")
+        self.extra_context.update({"email": email})
+        return super().form_valid(form)
