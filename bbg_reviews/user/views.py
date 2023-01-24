@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.views import PasswordResetView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
@@ -58,12 +58,17 @@ def login_(request):
         password = request.POST["password"]
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            form = login(request, user)
+            login(request, user)
             messages.success(request, f"Welcome, {username}!")
             return redirect("index")
-
         else:
-            messages.info(request, f"Account has not been registered yet.")
+            UserModel = get_user_model()
+            try:
+                UserModel.objects.get(username=username)
+                messages.error(request, f"Incorrect password.")
+            except UserModel.DoesNotExist:
+                messages.error(request, f"Account with this username does not exist.")
+            form = AuthenticationForm()
     else:
         form = AuthenticationForm()
     return render(request, "user/login.html", context={"form": form, "title": "Log in"})
