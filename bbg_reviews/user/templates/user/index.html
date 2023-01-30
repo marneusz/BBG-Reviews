@@ -73,6 +73,7 @@
             <li><a href="{% url "book_list" %}"><span class="glyphicon glyphicon-book_list"></span> &nbsp; Books</a></li>
             <li><a href="{% url "logout" %}"><span class="glyphicon glyphicon-log-out"></span> &nbsp; Logout</a></li>
             {% else %}
+            <li><a href="{% url "book_list" %}"><span class="glyphicon glyphicon-book_list"></span> &nbsp; Books</a></li>
             <li><a href="{% url "register" %}"><span class="glyphicon glyphicon-user"></span> &nbsp; Sign up</a></li>
             <li><a href="{% url "login" %}"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Log in</a></li>
             <li><a href="{% url 'password_reset' %}"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Forgot your password?</a></li>
